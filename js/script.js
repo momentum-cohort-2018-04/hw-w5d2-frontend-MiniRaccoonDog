@@ -41,6 +41,15 @@ $(document).ready(function () {
     // })
   })
   */
+  $('.nav__icon').hover(function () {
+    $(this).nextAll().addClass('show')
+  })
+  $('.nav__search').mouseleave(function () {
+    $(this).removeClass('show')
+  })
+  $('.nav__music').mouseleave(function () {
+    $(this).removeClass('show')
+  })
   $('.goto').click(function () {
     console.log(this)
   })
