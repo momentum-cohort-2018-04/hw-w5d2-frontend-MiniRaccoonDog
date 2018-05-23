@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="./css/style.scss" />
+  <script src="./js/script.js"></script>
+</head>
+
+<body>
+  <navigation class="nav">
+    <container class="nav__music">
+      <div class="nav__icon" id="musicicon"></div>
+      <audio id="music" controls>
+        <source src="https://audio-ssl.itunes.apple.com/apple-assets-us-std-000001/AudioPreview118/v4/b0/38/22/b03822b6-f59d-7541-24ec-876de0254b43/mzaf_6739111258026699895.plus.aac.p.m4a">
+      </audio>
+    </container>
+    <container class="nav__search">
+      <div class="nav__icon" id="searchicon"></div>
+      <form id="music-search">
+        <select>
+          <option value="search">Search</option>
+          <option value="artist">Artist</option>
+          <option value="album">Album</option>
+          <option value="song">Song</option>
+          <!-- <option value="genre">Genre</option> -->
+        </select>
+        <input type="text" placeholder="Search">
+        <button type="submit">Search</button>
+      </form>
+    </container>
+  </navigation>
+  <main class="results">
+    <container class="pages">
+      <a href="http://" id="previous">&lt;&lt; Previous</a> |
+      <a href="http://" id="next">Next &gt;&gt;</a> |
+      <a href="http://" id="reset">Reset</a> |
+
+      <label>Go to Page
+        <input type="text" name="page_input" id="page_input" value="">
+      </label>
+
+      <a href="#" id="goto">&gt;&gt;</a>
+
+      <span id="page_info">You are currently viewing page
+        <label id="curr_page"></label>
+      </span>
+
+      <ul id="results"></ul>
+
+      <nav>
+        <ul id="page_nav">
+
+        </ul>
+      </nav>
+
+    </container>
+  </main>
+</body>
+
+</html>

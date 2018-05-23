@@ -1,0 +1,32 @@
+{
+  "name": "hw-w5d2-frontend-miniraccoondog",
+  "version": "1.0.0",
+  "description": "Redoing old homework",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/momentum-cohort-2018-04/hw-w5d2-frontend-MiniRaccoonDog.git"
+  },
+  "author": "Alyssa Torres",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/momentum-cohort-2018-04/hw-w5d2-frontend-MiniRaccoonDog/issues"
+  },
+  "homepage": "https://github.com/momentum-cohort-2018-04/hw-w5d2-frontend-MiniRaccoonDog#readme",
+  "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "jest": "^22.4.4",
+    "superagent": "^3.8.3"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  },
+  "devDependencies": {
+    "babel-jest": "^22.4.4"
+  }
+}
