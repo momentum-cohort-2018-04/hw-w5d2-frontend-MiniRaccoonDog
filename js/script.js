@@ -166,3 +166,18 @@ function idLookup (id) {
     })
 }
 // const URL = `https://itunes.apple.com/search?term=`
+
+if (IDARRAY.length > 1) {
+  whole = IDARRAY[0].concat(IDARRAY[1]).concat(IDARRAY[2]).concat(IDARRAY[3])
+  // for (var i = 0; i < (IDARRAY.length - 1); i++){
+  //   whole = IDARRAY[0].concat(IDARRAY[1]).concat(IDARRAY[2]).concat(IDARRAY[3]])
+  // }
+} else { whole = IDARRAY[0] }
+
+sumR[1, 2, 3, 4]
+function sumR (nums) {
+  if (nums.length === 0) {
+    return 0
+  }
+  return nums[0] + sumR(nums.slice(1))
+}
