@@ -78,7 +78,7 @@ test('check it iterates through an Array', () => {
   // console.log('new page', pageTest)
   // const testArray = pageTest.array
   // console.log('testarray', testArray)
-  const step = pageTest.stepThrough()
+  const step = pageTest.createPreviews()
   // console.log('step', step)
   expect(step.length).toBe(2)
 })

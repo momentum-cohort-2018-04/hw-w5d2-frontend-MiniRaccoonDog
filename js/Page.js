@@ -1,23 +1,21 @@
 import Preview from './Preview'
+import $ from 'jquery'
 
 class Page {
   constructor (array) {
     this.array = array
+    this.pageNum = 0
   }
-  stepThrough () {
+  createPreviews () {
     // console.log('stepthro')
-    const htmlArray = []
-    // console.log(this.array)
+    const fullhtmlArray = []
     const originalArray = this.array
-    // console.log('original array?', originalArray)
-    // console.log(typeof (originalArray))
     for (var i = 0; i < originalArray.length; i++) {
-      // console.log(originalArray[i])
       let eachObject = originalArray[i]
       let eachPreview = new Preview(eachObject)
-      htmlArray.push(eachPreview.createDivBlock())
+      fullhtmlArray.push(eachPreview.createDivBlock())
     }
-    return htmlArray
+    return fullhtmlArray
   }
 
   arraySlicer (n, array) {
@@ -31,7 +29,7 @@ class Page {
     return pageArrays
   }
 
-  scaleSlicing (htmlArray) {
+  mediaQuerySlicing (htmlArray) {
     if (window.matchMedia('(min-width: 700px)').matches) {
       /* the viewport is at least 700 pixels wide */
       return this.arraySlicer(20, htmlArray)
@@ -40,32 +38,30 @@ class Page {
       return this.arraySlicer(9, htmlArray)
     }
   }
-  // length of this for how many
 
-  // paginator (n) {
-  //   const arrayforHTML = this.stepThrough()
-  //   const eachPage = this.scaleSlicing(arrayforHTML)
-  //   return eachPage[n]
-  // }
-
-  paginator (n) {
-    const arrayforHTML = this.stepThrough()
-    const pageArrays = this.scaleSlicing(arrayforHTML)
+  buildPaginator () {
+    const arrayforHTML = this.createPreviews()
+    const pageArrays = this.mediaQuerySlicing(arrayforHTML)
+    this.pageNum = pageArrays.length
     return pageArrays
+  }
+
+  makePageArray () {
+    console.log('DID PAGE ARRAYS LENGTH UPDATE?', this.pageNum)
+    const pagelinks = []
+    for (let i = 1; i <= this.pageNum; i++) {
+      pagelinks.push(`<li><a href="" id=${i}>${i}</a></li>`)
+    }
+    $('#pages-top').html(pagelinks.join(''))
+    $('#pages-bottom').html(pagelinks.join(''))
+    return pagelinks
   }
 }
 
 // this can go in Page.js
 /*
-function pageDiv (n) {
-  console.log('availiable here?', window.pageArray)
-  const pagelinks = []
-  for (let i = 1; i <= n; i++) {
-    pagelinks.push(`<li><a href="" id=${i}>${i}</a></li>`)
-  }
-  $('#pages-top').html(pagelinks.join(''))
-  $('#pages-bottom').html(pagelinks.join(''))
-  return pagelinks
-}
+function
 */
 export default Page
+
+13.22
