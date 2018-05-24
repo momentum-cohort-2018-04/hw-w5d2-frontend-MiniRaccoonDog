@@ -43,9 +43,6 @@ $(document).ready(function () {
   $('.nav__music').mouseleave(function () {
     $(this).removeClass('show')
   })
-  $('.goto').click(function () {
-    console.log(this)
-  })
 })
 
 function generalSearch (query) {
@@ -63,13 +60,11 @@ function generalSearch (query) {
 function activateNav () {
   $('#pages-top a').click(function (event) {
     event.preventDefault()
-    console.log(this)
     let newpage = $(this).html()
     $('.grid').html(window.pageArray[(newpage - 1)])
   })
   $('#pages-bottom a').click(function (event) {
     event.preventDefault()
-    console.log(this)
     let newpage = $(this).html()
     $('.grid').html(window.pageArray[(newpage - 1)])
   })
@@ -93,27 +88,13 @@ function artistSearch (query) {
       const responseObject = JSON.parse(response.text)
       const artistArray = responseObject.results
       const artistIds = []
-      if (artistArray[0]) {
-        const firstResult = new Page(artistArray[0])
-        artistIds.push(firstResult.array.artistId)
-      }
-      if (artistArray[1]) {
-        const secondResult = new Page(artistArray[1])
-        artistIds.push(secondResult.array.artistId)
-      }
-      // if (artistArray[2]) {
-      //   const thirdResult = new Page(artistArray[2])
-      //   artistIds.push(thirdResult.array.artistId)
-      // }
-      // console.log(artistIds)
-      // const masterArtistId = []
+      pushIdifExists(artistArray, 2, artistIds, `artistId`)
       for (var i = 0; i <= 1; i++) {
         let id = artistIds[i]
         idLookup(id)
       }
       setTimeout(function () {
         let whole
-        console.log('windowID', IDARRAY)
         if (IDARRAY.length === 2) {
           whole = IDARRAY[0].concat(IDARRAY[1])
         } else { whole = IDARRAY[0] }
@@ -122,7 +103,6 @@ function artistSearch (query) {
         idPage.makePageArray()
         $('.grid').html(window.pageArray[0])
         activateNav()
-        // console.log('WHOLE', whole)
       }, 75)
       IDARRAY = []
     })
@@ -136,22 +116,8 @@ function albumSearch (query) {
       const albumArray = responseObject.results
       console.log(albumArray)
       const albumIds = []
-      if (albumArray[0]) {
-        const firstResult = new Page(albumArray[0])
-        albumIds.push(firstResult.array.collectionId)
-      }
-      if (albumArray[1]) {
-        const secondResult = new Page(albumArray[1])
-        albumIds.push(secondResult.array.collectionId)
-      }
-      if (albumArray[2]) {
-        const thirdResult = new Page(albumArray[2])
-        albumIds.push(thirdResult.array.collectionId)
-      }
-      if (albumArray[3]) {
-        const fourthResult = new Page(albumArray[2])
-        albumIds.push(fourthResult.array.collectionId)
-      }
+      pushIdifExists(albumArray, 4, albumIds, `collectionId`)
+
       console.log(albumIds)
       for (var i = 0; i <= 3; i++) {
         let id = albumIds[i]
@@ -167,14 +133,24 @@ function albumSearch (query) {
           // }
         } else { whole = IDARRAY[0] }
         let idPage = new Page(whole)
+        console.log('idPage', idPage)
         window.pageArray = idPage.buildPaginator()
         idPage.makePageArray()
         $('.grid').html(window.pageArray[0])
         activateNav()
-        // console.log('WHOLE', whole)
-      }, 150)
+      }, 250)
       IDARRAY = []
     })
+}
+
+function pushIdifExists (givenarray, number, arrayIDs, key) {
+  for (var i = 0; i < number; i++) {
+    if (givenarray[i]) {
+      const iResult = new Page(givenarray[i])
+      arrayIDs.push(iResult.array[key])
+    }
+  }
+  console.log('push if if exists array', arrayIDs)
 }
 
 function idLookup (id) {
@@ -190,3 +166,18 @@ function idLookup (id) {
     })
 }
 // const URL = `https://itunes.apple.com/search?term=`
+
+if (IDARRAY.length > 1) {
+  whole = IDARRAY[0].concat(IDARRAY[1]).concat(IDARRAY[2]).concat(IDARRAY[3])
+  // for (var i = 0; i < (IDARRAY.length - 1); i++){
+  //   whole = IDARRAY[0].concat(IDARRAY[1]).concat(IDARRAY[2]).concat(IDARRAY[3]])
+  // }
+} else { whole = IDARRAY[0] }
+
+sumR[1, 2, 3, 4]
+function sumR (nums) {
+  if (nums.length === 0) {
+    return 0
+  }
+  return nums[0] + sumR(nums.slice(1))
+}
