@@ -168,3 +168,65 @@
       IDARRAY = []
     })
 }
+
+
+      // if (albumArray[0]) {
+      //   const firstResult = new Page(albumArray[0])
+      //   albumIds.push(firstResult.array.collectionId)
+      // }
+      // if (albumArray[1]) {
+      //   const secondResult = new Page(albumArray[1])
+      //   albumIds.push(secondResult.array.collectionId)
+      // }
+      // if (albumArray[2]) {
+      //   const thirdResult = new Page(albumArray[2])
+      //   albumIds.push(thirdResult.array.collectionId)
+      // }
+      // if (albumArray[3]) {
+      //   const fourthResult = new Page(albumArray[2])
+      //   albumIds.push(fourthResult.array.collectionId)
+      // }
+
+      replaced  by 
+      function pushIdifExists (givenarray, number, arrayIDs, key) {
+        for (var i = 0; i < number; i++) {
+          if (givenarray[i]) {
+            const iResult = new Page(givenarray[i])
+            arrayIDs.push(iResult.array[key])
+          }
+        }
+        console.log('push if if exists array', arrayIDs)
+      }
+      //pre recursive function//
+      setTimeout(function () {
+        let whole
+        console.log('windowID', IDARRAY)
+        if (IDARRAY.length === 2) {
+          whole = IDARRAY[0].concat(IDARRAY[1])
+        } else { whole = IDARRAY[0] }
+        let idPage = new Page(whole)
+        window.pageArray = idPage.buildPaginator()
+        idPage.makePageArray()
+        $('.grid').html(window.pageArray[0])
+        activateNav()
+        // console.log('WHOLE', whole)
+
+///album section before recursive fxn
+setTimeout(function () {
+  let whole = catArray(IDARRAY)
+  console.log('windowID', IDARRAY)
+
+  if (IDARRAY.length > 1) {
+    whole = IDARRAY[0].concat(IDARRAY[1]).concat(IDARRAY[2]).concat(IDARRAY[3])
+    // for (var i = 0; i < (IDARRAY.length - 1); i++){
+    //   whole = IDARRAY[0].concat(IDARRAY[1]).concat(IDARRAY[2]).concat(IDARRAY[3]])
+    // }
+  } else { whole = IDARRAY[0] }
+  let idPage = new Page(whole)
+  window.pageArray = idPage.buildPaginator()
+  idPage.makePageArray()
+  $('.grid').html(window.pageArray[0])
+  activateNav()
+  // console.log('WHOLE', whole)
+}, 150)
+IDARRAY = []

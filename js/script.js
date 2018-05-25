@@ -1,5 +1,5 @@
 import Page from './Page'
-import Preview from './Preview'
+// import Preview from './Preview'
 import $ from 'jquery'
 import request from 'superagent'
 
@@ -93,30 +93,14 @@ function artistSearch (query) {
       const responseObject = JSON.parse(response.text)
       const artistArray = responseObject.results
       const artistIds = []
-      if (artistArray[0]) {
-        const firstResult = new Page(artistArray[0])
-        artistIds.push(firstResult.array.artistId)
-      }
-      if (artistArray[1]) {
-        const secondResult = new Page(artistArray[1])
-        artistIds.push(secondResult.array.artistId)
-      }
-      // if (artistArray[2]) {
-      //   const thirdResult = new Page(artistArray[2])
-      //   artistIds.push(thirdResult.array.artistId)
-      // }
-      // console.log(artistIds)
-      // const masterArtistId = []
+      pushIdifExists(artistArray, 2, artistIds, `artistId`)
       for (var i = 0; i <= 1; i++) {
         let id = artistIds[i]
         idLookup(id)
       }
       setTimeout(function () {
-        let whole
-        console.log('windowID', IDARRAY)
-        if (IDARRAY.length === 2) {
-          whole = IDARRAY[0].concat(IDARRAY[1])
-        } else { whole = IDARRAY[0] }
+        let whole = catArray(IDARRAY)
+        // console.log('whole', whole)
         let idPage = new Page(whole)
         window.pageArray = idPage.buildPaginator()
         idPage.makePageArray()
@@ -136,36 +120,15 @@ function albumSearch (query) {
       const albumArray = responseObject.results
       console.log(albumArray)
       const albumIds = []
-      if (albumArray[0]) {
-        const firstResult = new Page(albumArray[0])
-        albumIds.push(firstResult.array.collectionId)
-      }
-      if (albumArray[1]) {
-        const secondResult = new Page(albumArray[1])
-        albumIds.push(secondResult.array.collectionId)
-      }
-      if (albumArray[2]) {
-        const thirdResult = new Page(albumArray[2])
-        albumIds.push(thirdResult.array.collectionId)
-      }
-      if (albumArray[3]) {
-        const fourthResult = new Page(albumArray[2])
-        albumIds.push(fourthResult.array.collectionId)
-      }
+      pushIdifExists(albumArray, 3, albumIds, `collectionId`)
       console.log(albumIds)
       for (var i = 0; i <= 3; i++) {
         let id = albumIds[i]
         idLookup(id)
       }
       setTimeout(function () {
-        let whole
-        console.log('windowID', IDARRAY)
-        if (IDARRAY.length > 1) {
-          whole = IDARRAY[0].concat(IDARRAY[1]).concat(IDARRAY[2]).concat(IDARRAY[3])
-          // for (var i = 0; i < (IDARRAY.length - 1); i++){
-          //   whole = IDARRAY[0].concat(IDARRAY[1]).concat(IDARRAY[2]).concat(IDARRAY[3]])
-          // }
-        } else { whole = IDARRAY[0] }
+        let whole = catArray(IDARRAY)
+        // console.log('whole', whole)
         let idPage = new Page(whole)
         window.pageArray = idPage.buildPaginator()
         idPage.makePageArray()
@@ -190,3 +153,19 @@ function idLookup (id) {
     })
 }
 // const URL = `https://itunes.apple.com/search?term=`
+function pushIdifExists (givenarray, number, arrayIDs, key) {
+  for (var i = 0; i < number; i++) {
+    if (givenarray[i]) {
+      const iResult = new Page(givenarray[i])
+      arrayIDs.push(iResult.array[key])
+    }
+  }
+  console.log('push if if exists array', arrayIDs)
+}
+
+function catArray (array) {
+  if (array.length === 0) {
+    return []
+  }
+  return array[0].concat(catArray(array.slice(1)))
+}
