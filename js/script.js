@@ -43,9 +43,6 @@ $(document).ready(function () {
   $('.nav__music').mouseleave(function () {
     $(this).removeClass('show')
   })
-  $('.goto').click(function () {
-    console.log(this)
-  })
 })
 
 function generalSearch (query) {
@@ -63,13 +60,11 @@ function generalSearch (query) {
 function activateNav () {
   $('#pages-top a').click(function (event) {
     event.preventDefault()
-    console.log(this)
     let newpage = $(this).html()
     $('.grid').html(window.pageArray[(newpage - 1)])
   })
   $('#pages-bottom a').click(function (event) {
     event.preventDefault()
-    console.log(this)
     let newpage = $(this).html()
     $('.grid').html(window.pageArray[(newpage - 1)])
   })
@@ -106,7 +101,6 @@ function artistSearch (query) {
         idPage.makePageArray()
         $('.grid').html(window.pageArray[0])
         activateNav()
-        // console.log('WHOLE', whole)
       }, 75)
       IDARRAY = []
     })
@@ -120,7 +114,8 @@ function albumSearch (query) {
       const albumArray = responseObject.results
       console.log(albumArray)
       const albumIds = []
-      pushIdifExists(albumArray, 3, albumIds, `collectionId`)
+      pushIdifExists(albumArray, 4, albumIds, `collectionId`)
+
       console.log(albumIds)
       for (var i = 0; i <= 3; i++) {
         let id = albumIds[i]
@@ -130,14 +125,24 @@ function albumSearch (query) {
         let whole = catArray(IDARRAY)
         // console.log('whole', whole)
         let idPage = new Page(whole)
+        console.log('idPage', idPage)
         window.pageArray = idPage.buildPaginator()
         idPage.makePageArray()
         $('.grid').html(window.pageArray[0])
         activateNav()
-        // console.log('WHOLE', whole)
-      }, 150)
+      }, 250)
       IDARRAY = []
     })
+}
+
+function pushIdifExists (givenarray, number, arrayIDs, key) {
+  for (var i = 0; i < number; i++) {
+    if (givenarray[i]) {
+      const iResult = new Page(givenarray[i])
+      arrayIDs.push(iResult.array[key])
+    }
+  }
+  console.log('push if if exists array', arrayIDs)
 }
 
 function idLookup (id) {
@@ -153,15 +158,6 @@ function idLookup (id) {
     })
 }
 // const URL = `https://itunes.apple.com/search?term=`
-function pushIdifExists (givenarray, number, arrayIDs, key) {
-  for (var i = 0; i < number; i++) {
-    if (givenarray[i]) {
-      const iResult = new Page(givenarray[i])
-      arrayIDs.push(iResult.array[key])
-    }
-  }
-  console.log('push if if exists array', arrayIDs)
-}
 
 function catArray (array) {
   if (array.length === 0) {
