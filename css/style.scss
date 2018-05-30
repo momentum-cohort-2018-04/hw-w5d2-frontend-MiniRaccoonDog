@@ -1,0 +1,199 @@
+$font-important: 'Oswald',
+sans-serif;
+$font-regular: 'Quattrocento',
+serif;
+$trans-back: hsla(270, 5, 15, .85);
+$dark: #1E5B5E;
+$highcontrast: #993035;
+$almostwhite: #D0C3A4;
+// $yellow: #ffffdd;
+// $aqua: #009999;
+// $orange: #fbdcaa;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  font-size: 16px;
+  text-decoration: none;
+  font-family: $font-regular;
+}
+
+body {
+  flex-direction: column;
+  margin: 1px;
+  background-color: $almostwhite;
+  border: $dark solid 2rem;
+  width: 100%;
+  * {
+    // border: red solid .25px;
+  }
+}
+
+
+.nav {
+  position: fixed;
+  top: 1rem;
+  left: -.3rem;
+  flex-direction: column;
+  align-content: center;
+  z-index: 100;
+  width: 100%;
+  &__bar {
+    height: 64px;
+    width: 50%;
+    justify-content: center;
+    align-content: center;
+    margin: auto 0;
+    text-align: center;
+    
+
+  }
+  &__icon {
+    height: 64px;
+    width: 64px;
+    background-color: $dark;
+    z-index: 1000;
+    // box-sizing: content-box;
+  }
+  &__music {
+    display: flex;
+    height: 100%;
+    background-color: $dark;
+    width: 90%;
+    padding: 1rem;
+    transition: transform .24s linear;
+  transform-origin: left;
+  transform: perspective(1000px) rotateY(90deg);
+  }
+  &__search {
+    height:100%;
+    background-color: $dark;
+    justify-content: center;
+    width: 90%;
+    padding: 1rem 2rem 0 2rem;
+    transition: transform .24s linear;
+  transform-origin: left;
+  transform: perspective(1000px) rotateY(90deg);
+    *{
+      height: 60%;
+    }
+  }
+  &__button {
+    padding: 0 1rem;
+  }
+  &__drop {
+    margin-right: 1rem;
+  }
+}
+
+.show {
+  transform: rotateY(0deg)
+}
+
+#musicicon {
+  background-image: url('https://png.icons8.com/wired/50/ffffff/music.png');
+  background-repeat: none;
+  background-size: contain;
+}
+
+#searchicon {
+  background-image: url('https://png.icons8.com/ios/50/ffffff/search-filled.png');
+  background-repeat: none;
+  background-size: contain;
+}
+
+
+
+.pages {
+  padding-left: 10%;
+  background-color: $highcontrast;
+  flex-direction: row;
+  color: white;
+  li a {
+    padding: .5rem;
+    justify-content: center;
+    color: white;
+  }
+  li a:hover {
+    color: #637D7E;
+    background-color: #650005;
+  }
+
+}
+
+a.goto {
+  height: 1.2rem;
+  width: 1.2rem;
+  background-image: url('https://png.icons8.com/ios/50/ffffff/circled-chevron-right.png');
+  background-repeat: none;
+  background-size: contain
+}
+
+.results {
+  flex-direction: column;
+}
+
+
+.grid {
+  flex-wrap: wrap;
+}
+
+.sample {
+  position: relative;
+  // padding: 0 .25rem;
+  flex-direction: column;
+  border: #993035 solid .9px;
+  text-align: center;
+  overflow: hidden;
+  width: 20%;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+  &__info {
+    display: block;
+    position: absolute;
+    z-index: 100;
+    top: 72%;
+    width:100%;
+    background-color: $trans-back;
+    color: white;
+  }
+} 
+
+.info-song, .info-album, .info-artist {
+  justify-content: center;
+  overflow: hidden;
+}
+
+#pages-top,
+#pages-bottom {
+  margin: 0 2rem;
+  * {
+    margin: 0 .5rem
+  }
+}
+
+
+.arrow {
+  padding-left: 1.5rem;
+  background-position: left;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-image: url("https://png.icons8.com/ios/50/ffffff/sort-down-filled.png");
+  height: 1.1rem;
+  overflow: hidden;
+}
+
+.noarrow {
+  padding-left: 0;
+  background-image: none;
+  overflow: visible;
+  height: auto;
+}
+
+// .footer{
+//   color: grey;
+//   text-decoration:none;
+// }
